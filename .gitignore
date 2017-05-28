@@ -1,2 +1,6 @@
-
+# Ignore the node_modules directory
 node_modules
+
+# Ignore contents of build directory (but not the build directory itself)
+build/*
+!build/.gitkeep
