@@ -4,3 +4,6 @@ node_modules
 # Ignore contents of build directory (but not the build directory itself)
 build/*
 !build/.gitkeep
+
+# Ignore log files (like npm-debug.log)
+*.log
