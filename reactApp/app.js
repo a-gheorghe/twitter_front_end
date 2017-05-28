@@ -1,7 +1,17 @@
-// npm install --save react react-dom babel-core webpack babel-loader babel-preset-es2015 babel-preset-react
-
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 
+class Todo extends Component {
+  constructor(props) {
+    super(props);
 
-ReactDom.render(<p>Can you see me?</p>, document.getElementById('root'));
+  }
+
+  render() {
+    return (
+      <p>Can you see me now?</p>
+    )
+  }
+}
+
+ReactDom.render(<Todo />, document.getElementById('root'));
