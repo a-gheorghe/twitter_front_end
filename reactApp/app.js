@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 
 // dummy DB
+let id = 0;
 const dummyData = [
-  { task: "Make app not static", completed: false },
-  { task: "Finish curriculum", completed: true },
-  { task: "Teach snot-nosed kids to code", completed: false }
+  { id: id++, task: "Make app not static", completed: false },
+  { id: id++, task: "Finish curriculum", completed: true },
+  { id: id++, task: "Teach snot-nosed kids to code", completed: false }
 ];
 
 class Todo extends Component {
@@ -26,12 +27,13 @@ class TodoList extends Component {
     return (
       <ul>
         {
-          this.props.todos.map((x, i) => (
+          this.props.todos.map((todo, index) => (
             <Todo
-              task={x.task}
-              completed={x.completed}
-              toggleTodo={() => this.props.toggleTodo(i)}
-              removeTodo={() => this.props.removeTodo(i)}
+              key={todo.id}
+              task={todo.task}
+              completed={todo.completed}
+              toggleTodo={() => this.props.toggleTodo(index)}
+              removeTodo={() => this.props.removeTodo(index)}
             >
             </Todo>
           ))
@@ -57,7 +59,7 @@ class TodoApp extends Component {
 
   addTodo(task) {
     // add to DB
-    dummyData.push({ task: task, completed: false });
+    dummyData.push({ id: id++, task: task, completed: false });
     // setState out of DB
     this.setState({ todos: dummyData });
   }
