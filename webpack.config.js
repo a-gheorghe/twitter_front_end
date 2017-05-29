@@ -1,17 +1,10 @@
-const path = require('path');
 const webpack = require('webpack');
-const HtmlWebackPlugin = require('html-webpack-plugin');
 
-const scriptInjector = new HtmlWebackPlugin({
-  template: path.join(__dirname, 'reactApp/index.html'),
-  filename: 'index.html',
-  inject: 'body'
-});
 
 module.exports = {
   entry: './reactApp/app.js',
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: __dirname + '/build',
     filename: 'app.bundle.js'
   },
   module: {
@@ -29,7 +22,6 @@ module.exports = {
       }
     ]
   },
-  plugins: [ scriptInjector ],
   stats: {
     colors: true
   },
