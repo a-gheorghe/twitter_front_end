@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 
+// dummy DB
 const dummyData = [
   { task: "Make app not static", completed: false },
   { task: "Finish curriculum", completed: true },
@@ -12,16 +13,42 @@ class Todo extends Component {
     return (
       <li>
         <button>X</button>
-        {(this.props.completed ? (<strike> {this.props.task}</strike>) : (<span> {this.props.task}</span>))}
+        <span onClick={() => this.props.toggleTodo()}>
+          {this.props.completed ? <strike> {this.props.task}</strike> : this.props.task}
+        </span>
       </li>
     );
   }
 }
 
 class TodoList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { todos: dummyData };
+  }
+
+  toggleTodo(index) {
+    // change DB
+    dummyData[index].completed = !dummyData[index].completed;
+    // setState out of DB
+    this.setState({ todos: dummyData });
+  }
+
   render() {
     return (
-      <ul>{this.props.todos.map(x => <Todo task={x.task} completed={x.completed}></Todo>)}</ul>
+      <ul>
+        {
+          this.props.todos.map((x, i) => (
+            <Todo
+              task={x.task}
+              completed={x.completed}
+              toggleTodo={() => this.toggleTodo(i)}
+            >
+            </Todo>
+          ))
+        }
+      </ul>
     )
   }
 }
