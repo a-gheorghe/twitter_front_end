@@ -15,7 +15,10 @@ class Todo extends Component {
 
   render() {
     return (
-      <li>{this.props.task}</li>
+      <li>
+        <button>X</button>
+        <span> {this.props.task}</span>
+      </li>
     );
   }
 }
@@ -49,7 +52,7 @@ class InputLine extends Component {
     return (
       <div>
         <input type="text"></input>
-        <button >X</button>
+        <button>Add Todo</button>
       </div>
     )
   }
