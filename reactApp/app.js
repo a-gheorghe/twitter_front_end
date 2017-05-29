@@ -12,7 +12,7 @@ class Todo extends Component {
   render() {
     return (
       <li>
-        <button>X</button>
+        <button onClick={() => this.props.removeTodo()}>X</button>
         <span onClick={() => this.props.toggleTodo()}>
           {this.props.completed ? <strike> {this.props.task}</strike> : this.props.task}
         </span>
@@ -31,6 +31,7 @@ class TodoList extends Component {
               task={x.task}
               completed={x.completed}
               toggleTodo={() => this.props.toggleTodo(i)}
+              removeTodo={() => this.props.removeTodo(i)}
             >
             </Todo>
           ))
@@ -61,11 +62,24 @@ class TodoApp extends Component {
     this.setState({ todos: dummyData });
   }
 
+  removeTodo(index) {
+    // remove from DB
+    dummyData.splice(index, 1);
+    // setState out of DB
+    this.setState({ todos: dummyData });
+  }
+
   render() {
     return (
       <div>
-        <InputLine addTodo={(task) => this.addTodo(task)}/>
-        <TodoList todos={dummyData} toggleTodo={(index) => this.toggleTodo(index)}/>
+        <InputLine
+          addTodo={(task) => this.addTodo(task)}
+        />
+        <TodoList
+          todos={dummyData}
+          toggleTodo={(index) => this.toggleTodo(index)}
+          removeTodo={(index) => this.removeTodo(index)}
+        />
       </div>
     );
   }
@@ -95,8 +109,7 @@ class InputLine extends Component {
           placeholder="task"
           onChange={(event) => this.handleChange(event)}
           value={this.state.task}
-        >
-        </input>
+        />
         <button onClick={() => this.handleSubmit()}>Add Todo</button>
       </div>
     )
