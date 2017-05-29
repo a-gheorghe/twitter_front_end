@@ -22,6 +22,25 @@ class Todo extends Component {
 }
 
 class TodoList extends Component {
+  render() {
+    return (
+      <ul>
+        {
+          this.props.todos.map((x, i) => (
+            <Todo
+              task={x.task}
+              completed={x.completed}
+              toggleTodo={() => this.props.toggleTodo(i)}
+            >
+            </Todo>
+          ))
+        }
+      </ul>
+    )
+  }
+}
+
+class TodoApp extends Component {
   constructor(props) {
     super(props);
 
@@ -35,30 +54,18 @@ class TodoList extends Component {
     this.setState({ todos: dummyData });
   }
 
-  render() {
-    return (
-      <ul>
-        {
-          this.props.todos.map((x, i) => (
-            <Todo
-              task={x.task}
-              completed={x.completed}
-              toggleTodo={() => this.toggleTodo(i)}
-            >
-            </Todo>
-          ))
-        }
-      </ul>
-    )
+  addTodo(task) {
+    // add to DB
+    dummyData.push({ task: task, completed: false });
+    // setState out of DB
+    this.setState({ todos: dummyData });
   }
-}
 
-class TodoApp extends Component {
   render() {
     return (
       <div>
-        <InputLine />
-        <TodoList todos={dummyData}/>
+        <InputLine addTodo={(task) => this.addTodo(task)}/>
+        <TodoList todos={dummyData} toggleTodo={(index) => this.toggleTodo(index)}/>
       </div>
     );
   }
