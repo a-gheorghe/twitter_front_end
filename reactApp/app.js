@@ -2,41 +2,31 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 
 const dummyData = [
-  "Make app not static",
-  "Finish curriculum",
-  "Teach snot-nosed kids to code"
-]
+  { task: "Make app not static", completed: false },
+  { task: "Finish curriculum", completed: true },
+  { task: "Teach snot-nosed kids to code", completed: false }
+];
 
 class Todo extends Component {
-  constructor(props) {
-    super(props);
-
-  }
-
   render() {
     return (
       <li>
         <button>X</button>
-        <span> {this.props.task}</span>
+        {(this.props.completed ? (<strike> {this.props.task}</strike>) : (<span> {this.props.task}</span>))}
       </li>
     );
   }
 }
 
 class TodoList extends Component {
-
   render() {
     return (
-      <ul>{this.props.todos.map(x => <Todo task={x}></Todo>)}</ul>
+      <ul>{this.props.todos.map(x => <Todo task={x.task} completed={x.completed}></Todo>)}</ul>
     )
   }
 }
 
 class TodoApp extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>
