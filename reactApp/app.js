@@ -9,40 +9,6 @@ const dummyData = [
   { id: id++, task: "Teach snot-nosed kids to code", completed: false }
 ];
 
-class Todo extends Component {
-  render() {
-    return (
-      <li>
-        <button onClick={() => this.props.removeTodo()}>X</button>
-        <span onClick={() => this.props.toggleTodo()}>
-          {this.props.completed ? <strike> {this.props.task}</strike> : this.props.task}
-        </span>
-      </li>
-    );
-  }
-}
-
-class TodoList extends Component {
-  render() {
-    return (
-      <ul>
-        {
-          this.props.todos.map((todo, index) => (
-            <Todo
-              key={todo.id}
-              task={todo.task}
-              completed={todo.completed}
-              toggleTodo={() => this.props.toggleTodo(index)}
-              removeTodo={() => this.props.removeTodo(index)}
-            >
-            </Todo>
-          ))
-        }
-      </ul>
-    )
-  }
-}
-
 class TodoApp extends Component {
   constructor(props) {
     super(props);
@@ -87,35 +53,41 @@ class TodoApp extends Component {
   }
 }
 
-class InputLine extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = { task: '' };
-  }
-
-  handleChange(event) {
-    this.setState({ task: event.target.value });
-  }
-
-  handleSubmit() {
-    this.props.addTodo(this.state.task);
-    this.setState({ task: '' });
-  }
-
+class TodoList extends Component {
   render() {
     return (
-      <div>
-        <input
-          type="text"
-          placeholder="task"
-          onChange={(event) => this.handleChange(event)}
-          value={this.state.task}
-        />
-        <button onClick={() => this.handleSubmit()}>Add Todo</button>
-      </div>
+      <ul>
+        {
+          this.props.todos.map((todo, index) => (
+            <Todo
+              key={todo.id}
+              task={todo.task}
+              completed={todo.completed}
+              toggleTodo={() => this.props.toggleTodo(index)}
+              removeTodo={() => this.props.removeTodo(index)}
+            >
+            </Todo>
+          ))
+        }
+      </ul>
     )
   }
 }
+
+
+class Todo extends Component {
+  render() {
+    return (
+      <li>
+        <button onClick={() => this.props.removeTodo()}>X</button>
+        <span onClick={() => this.props.toggleTodo()}>
+          {this.props.completed ? <strike> {this.props.task}</strike> : this.props.task}
+        </span>
+      </li>
+    );
+  }
+}
+
 
 ReactDom.render(<TodoApp />, document.getElementById('root'));
