@@ -1,0 +1,36 @@
+h1 {
+  color: red;
+  text-align: center;
+}
+
+.main-page {
+  background-color: CornflowerBlue;
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.message-box {
+  align-items: center;
+  flex: 1;
+  display: flex;
+  border: 1px solid MidnightBlue;
+  height: 200px;
+  width: 600px;
+  background-color: CornflowerBlue
+}
+.input-div {
+  background-color: LightSkyBlue;
+  border: 5px solid grey
+}
+
+.input-box {
+  background-color: LightSkyBlue
+}
+
+.highlighted-message-box {
+  border: 1px solid MidnightBlue;
+  height: 200px;
+  width: 600px;
+  background-color: yellow
+}
